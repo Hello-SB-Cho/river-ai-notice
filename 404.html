@@ -330,7 +330,9 @@
           </defs>
           <circle cx="32" cy="32" r="32" fill="url(#moonGlow)"/>
           <circle cx="32" cy="32" r="19" fill="#fff3c4"/>
-          <!-- rabbit pounding rice cake (silhouette) -->
+          <clipPath id="moonClip"><circle cx="32" cy="32" r="18"/></clipPath>
+          <!-- rabbit pounding rice cake (silhouette), kept inside the moon -->
+          <g clip-path="url(#moonClip)"><g transform="translate(32 34) scale(.82) translate(-32 -32)">
           <g fill="#d9c47e" stroke="#d9c47e" opacity=".9">
             <ellipse cx="21.5" cy="19.5" rx="1.4" ry="4.6" transform="rotate(-18 21.5 19.5)" stroke="none"/>
             <ellipse cx="24.8" cy="19" rx="1.4" ry="4.6" transform="rotate(6 24.8 19)" stroke="none"/>
@@ -345,7 +347,7 @@
             <path d="M33.5 35.5 H44.5 L42.5 41.5 H35.5 Z" stroke="none"/>
             <rect x="37" y="41" width="4" height="3.4" stroke="none"/>
             <rect x="35" y="44" width="8" height="1.6" rx=".8" stroke="none"/>
-          </g>
+          </g></g></g>
         </svg>
         <!-- sun -->
         <svg class="sun" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
