@@ -121,7 +121,7 @@
     @keyframes shimmer { 0%,100% { opacity: .15; } 50% { opacity: .55; } }
 
     /* ---- day / night cycle: 3s each way ---- */
-    .visual { --dn: 3s; }
+    .visual { --dn: 4s; }
     .night-sky, .stars, .moon, .lights { opacity: 0; }
     .night-sky {
       position: absolute; inset: 0; z-index: 0;
@@ -130,7 +130,9 @@
     }
     .stars, .moon { position: absolute; z-index: 0; animation: toNight var(--dn) ease-in-out infinite alternate; }
     .stars { inset: 0; width: 100%; height: 60%; }
-    .moon { top: 40px; left: 36px; width: 64px; height: 64px; animation-name: moonRise; }
+    .moon { top: 30px; left: 26px; width: 88px; height: 88px; animation-name: moonRise; }
+    .moon .pestle { transform-box: view-box; transform-origin: 29px 32px; animation: pound .9s ease-in-out infinite; }
+    @keyframes pound { 0%,100% { transform: rotate(-14deg); } 50% { transform: rotate(6deg); } }
     .sun { animation: sunSet var(--dn) ease-in-out infinite alternate; }
     .cloud { animation-name: drift, dimCloud !important; animation-duration: 46s, var(--dn) !important; animation-timing-function: linear, ease-in-out !important; animation-iteration-count: infinite, infinite !important; animation-direction: normal, alternate !important; }
     .cloud.c2 { animation-duration: 64s, var(--dn) !important; }
@@ -260,8 +262,21 @@
           </defs>
           <circle cx="32" cy="32" r="32" fill="url(#moonGlow)"/>
           <circle cx="32" cy="32" r="19" fill="#fff3c4"/>
-          <g fill="#e9dca6" opacity=".75">
-            <circle cx="26" cy="27" r="4"/><circle cx="38" cy="36" r="3"/><circle cx="30" cy="40" r="2"/><circle cx="39" cy="24" r="1.8"/>
+          <!-- rabbit pounding rice cake (silhouette) -->
+          <g fill="#d9c47e" stroke="#d9c47e" opacity=".9">
+            <ellipse cx="21.5" cy="19.5" rx="1.4" ry="4.6" transform="rotate(-18 21.5 19.5)" stroke="none"/>
+            <ellipse cx="24.8" cy="19" rx="1.4" ry="4.6" transform="rotate(6 24.8 19)" stroke="none"/>
+            <circle cx="24" cy="26.5" r="3.6" stroke="none"/>
+            <ellipse cx="26" cy="35" rx="5" ry="6.6" stroke="none"/>
+            <ellipse cx="22" cy="37" rx="2.2" ry="2" stroke="none"/>
+            <ellipse cx="27.5" cy="42" rx="4.6" ry="1.6" stroke="none"/>
+            <g class="pestle">
+              <path d="M29 32 L33.5 27.5" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M31 21 L37 33.5" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+            </g>
+            <path d="M33.5 35.5 H44.5 L42.5 41.5 H35.5 Z" stroke="none"/>
+            <rect x="37" y="41" width="4" height="3.4" stroke="none"/>
+            <rect x="35" y="44" width="8" height="1.6" rx=".8" stroke="none"/>
           </g>
         </svg>
         <!-- sun -->
