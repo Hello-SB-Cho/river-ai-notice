@@ -221,6 +221,25 @@
       color: var(--soft);
     }
 
+    /* desktop: fit the whole notice in one screen, no page scroll */
+    @media (min-width: 821px) and (min-height: 600px) {
+      html, body { height: 100%; }
+      body { height: 100dvh; overflow: hidden; justify-content: center; }
+      header { padding: 2.2vh 24px 0; }
+      header img { width: 30px; height: 30px; }
+      main { flex: 0 1 auto; padding: 1.8vh 24px; min-height: 0; align-items: stretch; }
+      .notice { height: min(800px, calc(100dvh - 96px)); }
+      .visual { padding-top: 0; min-height: 0; }
+      .content { padding: clamp(20px, 4vh, 44px) clamp(28px, 3.4vw, 44px); display: flex; flex-direction: column; justify-content: center; overflow: auto; }
+      .tag { align-self: flex-start; }
+      h1 { font-size: clamp(1.35rem, 3.4vh, 2.15rem); margin-top: 1.4vh; }
+      .lead { font-size: clamp(.85rem, 1.9vh, 1rem); margin-top: 1.4vh; line-height: 1.6; }
+      dl { margin-top: 2.4vh; font-size: clamp(.82rem, 1.8vh, .95rem); }
+      dl > div { padding: clamp(5px, 1.2vh, 12px) 4px; }
+      .apology { margin-top: 2vh; font-size: clamp(.82rem, 1.8vh, .95rem); }
+      .sign { margin-top: 1.6vh; }
+      footer { padding: 0 24px 1.6vh; }
+    }
     @media (max-width: 820px) {
       .notice { grid-template-columns: 1fr; }
       .visual { min-height: 0; padding-top: 110px; }
