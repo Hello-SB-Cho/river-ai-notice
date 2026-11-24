@@ -1,6 +1,6 @@
-# 리버에이아이 서버 이전 안내 페이지
+# 리버에이아이 서비스 공지 페이지 (river-ai-notice)
 
-사옥 이전으로 서비스 서버를 내리는 동안 `nakdong.river-ai.kr`에 접속한 사용자에게 **서버 이전 작업 중**이라는 안내를 보여 주는 임시 정적 페이지입니다.
+서버 점검·패치·이전 등으로 서비스를 잠시 내릴 때 `nakdong.river-ai.kr`에 접속한 사용자에게 안내를 보여 주는 임시 정적 페이지입니다. 현재 내용은 **사옥 이전에 따른 서버 이전** 안내입니다.
 GitHub Pages로 호스팅하며, 가비아 DNS를 잠시 이 페이지로 돌려 두는 방식으로 사용합니다.
 
 ## 구성 파일
@@ -15,7 +15,7 @@ GitHub Pages로 호스팅하며, 가비아 DNS를 잠시 이 페이지로 돌려
 
 ## 미리 보기 주소
 
-https://hello-sb-cho.github.io/hsfmms-404-temp-page/
+https://hello-sb-cho.github.io/river-ai-notice/
 
 지금은 확인용으로 사용자 도메인을 해제해 두었습니다. 실제 전환 전에 아래 0단계로 도메인을 다시 등록하세요.
 
@@ -78,5 +78,5 @@ python3 -m http.server 8000
 
 ## 저장소
 
-- GitHub: https://github.com/Hello-SB-Cho/hsfmms-404-temp-page
+- GitHub: https://github.com/Hello-SB-Cho/river-ai-notice
 - 문의: river_info@naver.com
