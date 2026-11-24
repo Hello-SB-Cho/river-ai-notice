@@ -10,11 +10,24 @@ GitHub Pages로 호스팅하며, 가비아 DNS를 잠시 이 페이지로 돌려
 | `index.html` | 안내 페이지 본문 (그림, 문구, 스타일이 한 파일에 포함) |
 | `404.html` | `index.html`과 동일한 내용. 어떤 경로로 들어와도 같은 안내가 보이게 함 |
 | `logo.svg` | RiverAI 로고 (헤더와 파비콘) |
-| `CNAME` | GitHub Pages 사용자 도메인 (`nakdong.river-ai.kr`) |
 | `robots.txt` | 임시 페이지가 검색엔진에 수집되지 않도록 차단 |
 | `.nojekyll` | GitHub Pages의 Jekyll 처리 비활성화 |
 
+## 미리 보기 주소
+
+https://hello-sb-cho.github.io/hsfmms-404-temp-page/
+
+지금은 확인용으로 사용자 도메인을 해제해 두었습니다. 실제 전환 전에 아래 0단계로 도메인을 다시 등록하세요.
+
 ## 안내 페이지 켜기 (가비아 DNS 전환)
+
+0. 사용자 도메인 다시 등록 (DNS 변경 직전)
+
+   ```bash
+   echo "nakdong.river-ai.kr" > CNAME && git add CNAME && git commit -m "Set custom domain" && git push
+   ```
+
+   또는 GitHub 저장소 → Settings → Pages → Custom domain에 `nakdong.river-ai.kr` 입력 후 Save
 
 1. 가비아 → **DNS 관리** → `river-ai.kr` 선택
 2. 호스트 `nakdong`의 기존 **A 레코드 값을 메모**한 뒤 삭제
