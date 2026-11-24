@@ -75,30 +75,50 @@
     }
 
     .visual {
-      background: linear-gradient(160deg, #1d5679 0%, #164864 55%, #0f3a52 100%);
       position: relative;
+      background: linear-gradient(180deg, #5db4ef 0%, #9fd6fb 45%, #d6efff 75%, #e9f7ff 100%);
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      padding: 32px 0 0;
+      padding: 150px 0 0;
       overflow: hidden;
       min-height: 360px;
     }
-    .visual svg { width: 100%; max-width: 440px; display: block; height: auto; position: relative; z-index: 1; }
+    .visual > svg.scene { width: 100%; height: auto; display: block; position: relative; z-index: 1; }
 
-    .truck { animation: drive 3.2s ease-in-out infinite; }
-    @keyframes drive { 0%,100% { transform: translateX(0); } 50% { transform: translateX(10px); } }
-    .wheel { transform-box: fill-box; transform-origin: center; animation: spin 1.2s linear infinite; }
+    .sun { position: absolute; top: 34px; right: 34px; width: 120px; height: 120px; z-index: 0; }
+    .sun .rays { transform-origin: 60px 60px; animation: spin 40s linear infinite; }
+    .sun .core { animation: glow 4s ease-in-out infinite; transform-origin: 60px 60px; }
+    @keyframes glow { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    .cloud { position: absolute; z-index: 0; opacity: .95; }
+    .cloud.c1 { top: 56px; left: -140px; width: 120px; animation: drift 46s linear infinite; }
+    .cloud.c2 { top: 120px; left: -100px; width: 84px; animation: drift 64s linear infinite; animation-delay: -30s; opacity: .8; }
+    .cloud.c3 { top: 24px; left: -90px; width: 70px; animation: drift 80s linear infinite; animation-delay: -55s; opacity: .7; }
+    @keyframes drift { from { transform: translateX(0); } to { transform: translateX(720px); } }
+
+    .truck { animation: cross 9s ease-in-out infinite; }
+    @keyframes cross {
+      0% { transform: translate(64px, 222px); opacity: 0; }
+      8% { opacity: 1; }
+      86% { transform: translate(282px, 222px); opacity: 1; }
+      100% { transform: translate(290px, 222px); opacity: 0; }
+    }
+    .wheel { transform-box: fill-box; transform-origin: center; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .wave1 { animation: wave 7s linear infinite; }
-    .wave2 { animation: wave 11s linear infinite reverse; }
+    .wave1 { animation: wave 8s linear infinite; }
+    .wave2 { animation: wave 12s linear infinite reverse; }
     @keyframes wave { to { transform: translateX(-200px); } }
     .blink { animation: blink 1.6s ease-in-out infinite; }
-    .blink.d2 { animation-delay: .5s; }
-    .blink.d3 { animation-delay: 1s; }
-    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
-    .dash { stroke-dasharray: 4 6; animation: flow 1.4s linear infinite; }
-    @keyframes flow { to { stroke-dashoffset: -20; } }
+    .blink.d2 { animation-delay: .8s; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .2; } }
+    .duck { animation: bob 2.6s ease-in-out infinite; }
+    .duck.b2 { animation-delay: -.7s; }
+    .duck.b3 { animation-delay: -1.4s; }
+    .duck.b4 { animation-delay: -2s; }
+    @keyframes bob { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(2px) rotate(-2deg); } }
+    .duck { transform-box: fill-box; transform-origin: center bottom; }
+    .shimmer { animation: shimmer 3s ease-in-out infinite; }
+    @keyframes shimmer { 0%,100% { opacity: .15; } 50% { opacity: .55; } }
 
     .content { padding: 44px 44px 40px; }
 
@@ -176,8 +196,8 @@
 
     @media (max-width: 820px) {
       .notice { grid-template-columns: 1fr; }
-      .visual { min-height: 0; padding-top: 28px; }
-      .visual svg { max-width: 320px; }
+      .visual { min-height: 0; padding-top: 110px; }
+      .sun { width: 90px; height: 90px; top: 18px; right: 20px; }
       .content { padding: 32px 24px 28px; }
       dl > div { grid-template-columns: 80px 1fr; }
     }
@@ -195,83 +215,198 @@
   <main>
     <article class="notice" aria-labelledby="title">
       <div class="visual" aria-hidden="true">
-        <svg viewBox="0 0 400 330" xmlns="http://www.w3.org/2000/svg">
-          <!-- stars / sky dots -->
-          <g fill="#a5d8ff" opacity=".35">
-            <circle cx="40" cy="30" r="2"/><circle cx="120" cy="18" r="1.5"/><circle cx="300" cy="26" r="2"/>
-            <circle cx="360" cy="60" r="1.5"/><circle cx="220" cy="12" r="1.2"/>
+        <!-- sun -->
+        <svg class="sun" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff7c2" stop-opacity=".9"/>
+              <stop offset="100%" stop-color="#fff7c2" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="60" cy="60" r="58" fill="url(#sunGlow)"/>
+          <g class="rays" stroke="#ffd54a" stroke-width="4" stroke-linecap="round" opacity=".85">
+            <line x1="60" y1="8" x2="60" y2="20"/><line x1="60" y1="100" x2="60" y2="112"/>
+            <line x1="8" y1="60" x2="20" y2="60"/><line x1="100" y1="60" x2="112" y2="60"/>
+            <line x1="23" y1="23" x2="31" y2="31"/><line x1="89" y1="89" x2="97" y2="97"/>
+            <line x1="23" y1="97" x2="31" y2="89"/><line x1="89" y1="31" x2="97" y2="23"/>
           </g>
+          <circle class="core" cx="60" cy="60" r="27" fill="#ffd23f"/>
+          <circle cx="60" cy="60" r="27" fill="none" stroke="#ffe680" stroke-width="3"/>
+        </svg>
+        <!-- clouds -->
+        <svg class="cloud c1" viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg"><path d="M20 44 Q2 44 4 32 Q6 22 20 24 Q22 8 40 10 Q52 0 66 10 Q84 6 88 22 Q106 20 112 32 Q116 44 98 44 Z" fill="#ffffff"/></svg>
+        <svg class="cloud c2" viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg"><path d="M20 44 Q2 44 4 32 Q6 22 20 24 Q22 8 40 10 Q52 0 66 10 Q84 6 88 22 Q106 20 112 32 Q116 44 98 44 Z" fill="#ffffff"/></svg>
+        <svg class="cloud c3" viewBox="0 0 120 50" xmlns="http://www.w3.org/2000/svg"><path d="M20 44 Q2 44 4 32 Q6 22 20 24 Q22 8 40 10 Q52 0 66 10 Q84 6 88 22 Q106 20 112 32 Q116 44 98 44 Z" fill="#ffffff"/></svg>
 
-          <!-- old building (left) -->
+        <svg class="scene" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="river" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4aa3d8"/>
+              <stop offset="100%" stop-color="#1f5f8c"/>
+            </linearGradient>
+          </defs>
+
+          <!-- distant hills -->
+          <path d="M0 232 Q 50 168 120 214 Q 180 160 250 206 Q 320 170 400 214 V240 H0 Z" fill="#a9dcb4"/>
+          <path d="M0 236 Q 70 196 150 228 Q 230 196 300 226 Q 360 206 400 226 V244 H0 Z" fill="#86c795"/>
+
+          <!-- river -->
+          <rect x="0" y="240" width="400" height="180" fill="url(#river)"/>
+
+          <!-- banks -->
+          <path d="M0 230 H78 L100 262 H0 Z" fill="#5fa56a"/>
+          <path d="M0 230 H78 L82 236 H0 Z" fill="#79bf82"/>
+          <path d="M300 262 L322 230 H400 V262 Z" fill="#5fa56a"/>
+          <path d="M318 236 L322 230 H400 V236 Z" fill="#79bf82"/>
+
+          <!-- old office (left) -->
           <g>
-            <rect x="22" y="70" width="88" height="150" rx="6" fill="#2b6a90"/>
-            <rect x="22" y="70" width="88" height="14" rx="6" fill="#3a7ca3"/>
-            <g fill="#164864">
-              <rect x="36" y="96" width="18" height="16" rx="2"/><rect x="78" y="96" width="18" height="16" rx="2"/>
-              <rect x="36" y="124" width="18" height="16" rx="2"/><rect x="78" y="124" width="18" height="16" rx="2"/>
-              <rect x="36" y="152" width="18" height="16" rx="2"/><rect x="78" y="152" width="18" height="16" rx="2"/>
+            <rect x="10" y="146" width="58" height="86" rx="4" fill="#5b8db0"/>
+            <rect x="10" y="146" width="58" height="10" rx="4" fill="#6f9fc0"/>
+            <g fill="#2e6385">
+              <rect x="19" y="164" width="12" height="11" rx="1.5"/><rect x="46" y="164" width="12" height="11" rx="1.5"/>
+              <rect x="19" y="184" width="12" height="11" rx="1.5"/><rect x="46" y="184" width="12" height="11" rx="1.5"/>
             </g>
-            <rect x="54" y="186" width="24" height="34" rx="2" fill="#164864"/>
-            <text x="66" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="#a5d8ff" font-family="Noto Sans KR, sans-serif">기존 사옥</text>
+            <rect x="32" y="206" width="14" height="26" rx="1.5" fill="#2e6385"/>
+            <text x="39" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#164864" font-family="Noto Sans KR, sans-serif">기존 사옥</text>
           </g>
 
-          <!-- new building (right) -->
+          <!-- new office (right) -->
           <g>
-            <rect x="290" y="50" width="92" height="170" rx="6" fill="#d7efff"/>
-            <rect x="290" y="50" width="92" height="14" rx="6" fill="#ffffff"/>
+            <rect x="334" y="124" width="58" height="108" rx="4" fill="#ffffff"/>
+            <rect x="334" y="124" width="58" height="10" rx="4" fill="#2e6385"/>
             <g fill="#a5d8ff">
-              <rect x="304" y="78" width="18" height="16" rx="2"/><rect x="350" y="78" width="18" height="16" rx="2"/>
-              <rect x="304" y="106" width="18" height="16" rx="2"/><rect x="350" y="106" width="18" height="16" rx="2"/>
-              <rect x="304" y="134" width="18" height="16" rx="2"/><rect x="350" y="134" width="18" height="16" rx="2"/>
+              <rect x="343" y="144" width="12" height="11" rx="1.5"/><rect x="370" y="144" width="12" height="11" rx="1.5"/>
+              <rect x="343" y="164" width="12" height="11" rx="1.5"/><rect x="370" y="164" width="12" height="11" rx="1.5"/>
+              <rect x="343" y="184" width="12" height="11" rx="1.5"/><rect x="370" y="184" width="12" height="11" rx="1.5"/>
             </g>
-            <rect x="324" y="176" width="24" height="44" rx="2" fill="#2e6385"/>
-            <circle cx="343" cy="198" r="2" fill="#f7941d"/>
-            <text x="336" y="42" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff" font-family="Noto Sans KR, sans-serif">새 사옥</text>
+            <rect x="356" y="206" width="14" height="26" rx="1.5" fill="#2e6385"/>
+            <circle cx="367" cy="220" r="1.5" fill="#f7941d"/>
+            <text x="363" y="116" text-anchor="middle" font-size="11" font-weight="700" fill="#164864" font-family="Noto Sans KR, sans-serif">새 사옥</text>
           </g>
 
-          <!-- data path -->
-          <path class="dash" d="M112 110 C 170 70, 230 70, 288 100" fill="none" stroke="#f7941d" stroke-width="2.5" stroke-linecap="round"/>
-          <polygon points="288,100 278,92 280,104" fill="#f7941d"/>
+          <!-- cable-stayed bridge -->
+          <g>
+            <!-- piers -->
+            <rect x="145" y="236" width="14" height="70" fill="#c9d6e1"/>
+            <rect x="249" y="236" width="14" height="70" fill="#c9d6e1"/>
+            <!-- cables -->
+            <g stroke="#ffffff" stroke-width="1.3" opacity=".95">
+              <line x1="152" y1="104" x2="72" y2="222"/><line x1="152" y1="104" x2="92" y2="222"/>
+              <line x1="152" y1="104" x2="112" y2="222"/><line x1="152" y1="104" x2="132" y2="222"/>
+              <line x1="152" y1="104" x2="172" y2="222"/><line x1="152" y1="104" x2="192" y2="222"/>
+              <line x1="256" y1="104" x2="214" y2="222"/><line x1="256" y1="104" x2="234" y2="222"/>
+              <line x1="256" y1="104" x2="276" y2="222"/><line x1="256" y1="104" x2="296" y2="222"/>
+              <line x1="256" y1="104" x2="316" y2="222"/><line x1="256" y1="104" x2="334" y2="222"/>
+            </g>
+            <!-- pylons -->
+            <path d="M147 236 L149 100 H155 L157 236 Z" fill="#f4f7fa" stroke="#9fb3c4" stroke-width="1"/>
+            <path d="M251 236 L253 100 H259 L261 236 Z" fill="#f4f7fa" stroke="#9fb3c4" stroke-width="1"/>
+            <circle class="blink" cx="152" cy="98" r="2.4" fill="#ff4d4d"/>
+            <circle class="blink d2" cx="256" cy="98" r="2.4" fill="#ff4d4d"/>
+            <!-- deck -->
+            <rect x="60" y="222" width="280" height="9" fill="#eef3f7"/>
+            <rect x="60" y="231" width="280" height="5" fill="#9fb3c4"/>
+            <path d="M60 226.5 H340" stroke="#c4d0da" stroke-width="1" stroke-dasharray="6 6"/>
+            <!-- railing -->
+            <path d="M60 219 H340" stroke="#ffffff" stroke-width="1.2"/>
+          </g>
 
-          <!-- truck carrying server rack -->
+          <!-- truck carrying the server across the bridge -->
           <g class="truck">
-            <!-- cargo -->
-            <rect x="140" y="146" width="92" height="64" rx="6" fill="#ffffff"/>
-            <!-- server rack inside cargo -->
-            <rect x="152" y="154" width="36" height="48" rx="4" fill="#164864"/>
-            <rect x="157" y="160" width="26" height="8" rx="2" fill="#2e6385"/>
-            <rect x="157" y="172" width="26" height="8" rx="2" fill="#2e6385"/>
-            <rect x="157" y="184" width="26" height="8" rx="2" fill="#2e6385"/>
-            <circle class="blink" cx="179" cy="164" r="1.8" fill="#7CFFB2"/>
-            <circle class="blink d2" cx="179" cy="176" r="1.8" fill="#f7941d"/>
-            <circle class="blink d3" cx="179" cy="188" r="1.8" fill="#7CFFB2"/>
-            <!-- box -->
-            <rect x="196" y="170" width="28" height="32" rx="3" fill="#f2c48d"/>
-            <path d="M196 182 H224" stroke="#d99a52" stroke-width="2"/>
-            <path d="M210 170 V182" stroke="#d99a52" stroke-width="2"/>
-            <!-- cab -->
-            <path d="M232 166 H258 L272 184 V210 H232 Z" fill="#f7941d"/>
-            <path d="M238 172 H255 L265 186 H238 Z" fill="#d7efff"/>
-            <rect x="228" y="206" width="48" height="6" rx="3" fill="#164864"/>
-            <rect x="136" y="206" width="96" height="6" rx="3" fill="#164864"/>
-            <!-- wheels -->
-            <g class="wheel"><circle cx="164" cy="216" r="11" fill="#0f2e40"/><circle cx="164" cy="216" r="4" fill="#a5d8ff"/><rect x="163" y="207" width="2" height="5" fill="#a5d8ff"/></g>
-            <g class="wheel"><circle cx="252" cy="216" r="11" fill="#0f2e40"/><circle cx="252" cy="216" r="4" fill="#a5d8ff"/><rect x="251" y="207" width="2" height="5" fill="#a5d8ff"/></g>
+            <rect x="0" y="-25" width="38" height="20" rx="2.5" fill="#ffffff" stroke="#c4d0da" stroke-width=".8"/>
+            <rect x="4" y="-22" width="13" height="15" rx="1.5" fill="#164864"/>
+            <rect x="6" y="-20" width="9" height="2.6" rx=".6" fill="#2e6385"/>
+            <rect x="6" y="-16" width="9" height="2.6" rx=".6" fill="#2e6385"/>
+            <rect x="6" y="-12" width="9" height="2.6" rx=".6" fill="#2e6385"/>
+            <circle class="blink" cx="13.6" cy="-18.7" r=".8" fill="#7CFFB2"/>
+            <rect x="21" y="-17" width="13" height="11" rx="1" fill="#f2c48d"/>
+            <path d="M21 -11.5 H34 M27.5 -17 V-11.5" stroke="#d99a52" stroke-width="1"/>
+            <path d="M38 -19 H47 L53 -12 V-4 H38 Z" fill="#f7941d"/>
+            <path d="M40 -17 H46 L50 -12 H40 Z" fill="#d7efff"/>
+            <rect x="-1" y="-6" width="55" height="3" rx="1.5" fill="#164864"/>
+            <g class="wheel"><circle cx="10" cy="-2" r="4.2" fill="#0f2e40"/><circle cx="10" cy="-2" r="1.5" fill="#a5d8ff"/></g>
+            <g class="wheel"><circle cx="45" cy="-2" r="4.2" fill="#0f2e40"/><circle cx="45" cy="-2" r="1.5" fill="#a5d8ff"/></g>
           </g>
 
-          <!-- ground -->
-          <rect x="0" y="226" width="400" height="6" fill="#0f3a52"/>
-
-          <!-- river waves -->
-          <g class="wave1">
-            <path d="M0 250 Q 25 240 50 250 T 100 250 T 150 250 T 200 250 T 250 250 T 300 250 T 350 250 T 400 250 T 450 250 T 500 250 T 550 250 T 600 250 V330 H0 Z" fill="#2e6385" opacity=".85"/>
+          <!-- water level gauge station (left, in the river) -->
+          <g>
+            <rect x="44" y="300" width="4" height="70" fill="#7f97aa"/>
+            <rect x="88" y="300" width="4" height="70" fill="#7f97aa"/>
+            <path d="M44 318 L92 340 M92 318 L44 340" stroke="#7f97aa" stroke-width="2"/>
+            <rect x="36" y="296" width="64" height="6" rx="1" fill="#9fb3c4"/>
+            <rect x="42" y="268" width="52" height="30" rx="2" fill="#ffffff"/>
+            <path d="M38 270 L68 252 L98 270 Z" fill="#f7941d"/>
+            <rect x="50" y="276" width="14" height="10" rx="1" fill="#a5d8ff"/>
+            <rect x="72" y="278" width="14" height="20" rx="1" fill="#2e6385"/>
+            <!-- antenna + solar -->
+            <path d="M84 262 V238" stroke="#5b6b78" stroke-width="1.6"/>
+            <circle class="blink" cx="84" cy="236" r="2" fill="#ff4d4d"/>
+            <path d="M52 262 L62 252 L70 258 L60 268 Z" fill="#164864" stroke="#a5d8ff" stroke-width=".8"/>
+            <!-- staff gauge -->
+            <rect x="106" y="276" width="7" height="104" fill="#ffffff"/>
+            <g fill="#e0453a">
+              <rect x="106" y="280" width="7" height="5"/><rect x="106" y="292" width="7" height="5"/>
+              <rect x="106" y="304" width="7" height="5"/><rect x="106" y="316" width="7" height="5"/>
+              <rect x="106" y="328" width="7" height="5"/><rect x="106" y="340" width="7" height="5"/>
+            </g>
+            <path d="M113 282 h3 M113 294 h3 M113 306 h3 M113 318 h3 M113 330 h3 M113 342 h3" stroke="#ffffff" stroke-width="1"/>
           </g>
+
+          <!-- water surface waves -->
           <g class="wave2">
-            <path d="M0 272 Q 25 262 50 272 T 100 272 T 150 272 T 200 272 T 250 272 T 300 272 T 350 272 T 400 272 T 450 272 T 500 272 T 550 272 T 600 272 V330 H0 Z" fill="#a5d8ff" opacity=".35"/>
+            <path d="M0 318 Q 25 311 50 318 T 100 318 T 150 318 T 200 318 T 250 318 T 300 318 T 350 318 T 400 318 T 450 318 T 500 318 T 550 318 T 600 318 V420 H0 Z" fill="#3b8cc2" opacity=".55"/>
           </g>
           <g class="wave1">
-            <path d="M0 292 Q 25 284 50 292 T 100 292 T 150 292 T 200 292 T 250 292 T 300 292 T 350 292 T 400 292 T 450 292 T 500 292 T 550 292 T 600 292 V330 H0 Z" fill="#a5d8ff" opacity=".22"/>
+            <path d="M0 350 Q 25 342 50 350 T 100 350 T 150 350 T 200 350 T 250 350 T 300 350 T 350 350 T 400 350 T 450 350 T 500 350 T 550 350 T 600 350 V420 H0 Z" fill="#2d77aa" opacity=".7"/>
           </g>
+          <!-- shimmer -->
+          <g stroke="#ffffff" stroke-linecap="round" stroke-width="2">
+            <line class="shimmer" x1="180" y1="268" x2="204" y2="268"/>
+            <line class="shimmer" x1="300" y1="286" x2="316" y2="286" style="animation-delay:-1s"/>
+            <line class="shimmer" x1="140" y1="300" x2="152" y2="300" style="animation-delay:-2s"/>
+          </g>
+
+          <!-- ducks -->
+          <g>
+            <!-- mother -->
+            <g class="duck">
+              <ellipse cx="238" cy="374" rx="22" ry="4" fill="#ffffff" opacity=".25"/>
+              <path d="M220 370 Q 218 356 232 356 L 248 356 Q 258 356 258 364 Q 258 372 246 372 L 226 372 Q 220 372 220 370 Z" fill="#fffaf0"/>
+              <path d="M228 360 Q 238 356 246 362" stroke="#e8dcc4" stroke-width="2" fill="none"/>
+              <circle cx="252" cy="350" r="7" fill="#fffaf0"/>
+              <path d="M258 349 L266 351 L258 354 Z" fill="#f7941d"/>
+              <circle cx="254" cy="348.5" r="1.3" fill="#1d2a36"/>
+            </g>
+            <!-- ducklings -->
+            <g class="duck b2">
+              <ellipse cx="290" cy="382" rx="12" ry="2.6" fill="#ffffff" opacity=".25"/>
+              <path d="M280 380 Q 279 372 288 372 L 296 372 Q 301 372 301 377 Q 301 381 295 381 L 284 381 Q 280 381 280 380 Z" fill="#ffd84d"/>
+              <circle cx="298" cy="368" r="4.4" fill="#ffd84d"/>
+              <path d="M302 367.5 L307 368.8 L302 370.4 Z" fill="#f7941d"/>
+              <circle cx="299.3" cy="367" r=".9" fill="#1d2a36"/>
+            </g>
+            <g class="duck b3">
+              <ellipse cx="320" cy="388" rx="12" ry="2.6" fill="#ffffff" opacity=".25"/>
+              <path d="M310 386 Q 309 378 318 378 L 326 378 Q 331 378 331 383 Q 331 387 325 387 L 314 387 Q 310 387 310 386 Z" fill="#ffd84d"/>
+              <circle cx="328" cy="374" r="4.4" fill="#ffd84d"/>
+              <path d="M332 373.5 L337 374.8 L332 376.4 Z" fill="#f7941d"/>
+              <circle cx="329.3" cy="373" r=".9" fill="#1d2a36"/>
+            </g>
+            <g class="duck b4">
+              <ellipse cx="348" cy="380" rx="12" ry="2.6" fill="#ffffff" opacity=".25"/>
+              <path d="M338 378 Q 337 370 346 370 L 354 370 Q 359 370 359 375 Q 359 379 353 379 L 342 379 Q 338 379 338 378 Z" fill="#ffd84d"/>
+              <circle cx="356" cy="366" r="4.4" fill="#ffd84d"/>
+              <path d="M360 365.5 L365 366.8 L360 368.4 Z" fill="#f7941d"/>
+              <circle cx="357.3" cy="365" r=".9" fill="#1d2a36"/>
+            </g>
+          </g>
+
+          <!-- front wave -->
+          <g class="wave2">
+            <path d="M0 396 Q 25 389 50 396 T 100 396 T 150 396 T 200 396 T 250 396 T 300 396 T 350 396 T 400 396 T 450 396 T 500 396 T 550 396 T 600 396 V420 H0 Z" fill="#1f5f8c" opacity=".8"/>
+          </g>
+          <text x="76" y="389" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" font-family="Noto Sans KR, sans-serif" stroke="#1f5f8c" stroke-width="2.6" paint-order="stroke">수위관측소</text>
         </svg>
       </div>
 
