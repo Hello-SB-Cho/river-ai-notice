@@ -84,7 +84,7 @@
       overflow: hidden;
       min-height: 360px;
     }
-    .visual > svg.scene { width: 100%; height: auto; display: block; position: relative; z-index: 1; }
+    .visual > svg.scene { width: 100%; height: auto; display: block; position: relative; z-index: 1; overflow: visible; }
 
     .sun { position: absolute; top: 34px; right: 34px; width: 120px; height: 120px; z-index: 0; }
     .sun .rays { transform-origin: 60px 60px; animation: spin 40s linear infinite; }
@@ -379,17 +379,17 @@
           </defs>
 
           <!-- distant hills -->
-          <path d="M0 232 Q 50 168 120 214 Q 180 160 250 206 Q 320 170 400 214 V240 H0 Z" fill="#a9dcb4"/>
-          <path d="M0 236 Q 70 196 150 228 Q 230 196 300 226 Q 360 206 400 226 V244 H0 Z" fill="#86c795"/>
+          <path d="M-600 214 Q -520 170 -440 214 Q -360 168 -280 220 Q -200 180 -120 214 Q -60 190 0 232 Q 50 168 120 214 Q 180 160 250 206 Q 320 170 400 214 Q 470 176 540 216 Q 620 170 700 214 Q 780 186 860 220 Q 930 180 1000 214 V240 H-600 Z" fill="#a9dcb4"/>
+          <path d="M-600 226 Q -520 200 -440 228 Q -360 198 -280 228 Q -200 202 -120 226 Q -60 210 0 236 Q 70 196 150 228 Q 230 196 300 226 Q 360 206 400 226 Q 470 198 540 228 Q 620 200 700 226 Q 780 204 860 228 Q 930 204 1000 226 V244 H-600 Z" fill="#86c795"/>
 
           <!-- river -->
-          <rect x="0" y="240" width="400" height="180" fill="url(#river)"/>
+          <rect x="-600" y="240" width="1600" height="180" fill="url(#river)"/>
 
           <!-- banks -->
-          <path d="M0 230 H78 L100 262 H0 Z" fill="#5fa56a"/>
-          <path d="M0 230 H78 L82 236 H0 Z" fill="#79bf82"/>
-          <path d="M300 262 L322 230 H400 V262 Z" fill="#5fa56a"/>
-          <path d="M318 236 L322 230 H400 V236 Z" fill="#79bf82"/>
+          <path d="M-600 230 H78 L100 262 H-600 Z" fill="#5fa56a"/>
+          <path d="M-600 230 H78 L82 236 H-600 Z" fill="#79bf82"/>
+          <path d="M300 262 L322 230 H1000 V262 Z" fill="#5fa56a"/>
+          <path d="M318 236 L322 230 H1000 V236 Z" fill="#79bf82"/>
 
           <!-- old office (left) -->
           <g>
@@ -487,10 +487,10 @@
 
           <!-- water surface waves -->
           <g class="wave2">
-            <path d="M0 318 Q 25 311 50 318 T 100 318 T 150 318 T 200 318 T 250 318 T 300 318 T 350 318 T 400 318 T 450 318 T 500 318 T 550 318 T 600 318 V420 H0 Z" fill="#3b8cc2" opacity=".55"/>
+            <path d="M-600 318 Q -575 311 -550 318 T -500 318 T -450 318 T -400 318 T -350 318 T -300 318 T -250 318 T -200 318 T -150 318 T -100 318 T -50 318 T 0 318 T 50 318 T 100 318 T 150 318 T 200 318 T 250 318 T 300 318 T 350 318 T 400 318 T 450 318 T 500 318 T 550 318 T 600 318 T 650 318 T 700 318 T 750 318 T 800 318 T 850 318 T 900 318 T 950 318 T 1000 318 V420 H-600 Z" fill="#3b8cc2" opacity=".55"/>
           </g>
           <g class="wave1">
-            <path d="M0 350 Q 25 342 50 350 T 100 350 T 150 350 T 200 350 T 250 350 T 300 350 T 350 350 T 400 350 T 450 350 T 500 350 T 550 350 T 600 350 V420 H0 Z" fill="#2d77aa" opacity=".7"/>
+            <path d="M-600 350 Q -575 342 -550 350 T -500 350 T -450 350 T -400 350 T -350 350 T -300 350 T -250 350 T -200 350 T -150 350 T -100 350 T -50 350 T 0 350 T 50 350 T 100 350 T 150 350 T 200 350 T 250 350 T 300 350 T 350 350 T 400 350 T 450 350 T 500 350 T 550 350 T 600 350 T 650 350 T 700 350 T 750 350 T 800 350 T 850 350 T 900 350 T 950 350 T 1000 350 V420 H-600 Z" fill="#2d77aa" opacity=".7"/>
           </g>
           <!-- shimmer -->
           <g stroke="#ffffff" stroke-linecap="round" stroke-width="2">
@@ -536,7 +536,7 @@
 
           <!-- front wave -->
           <g class="wave2">
-            <path d="M0 396 Q 25 389 50 396 T 100 396 T 150 396 T 200 396 T 250 396 T 300 396 T 350 396 T 400 396 T 450 396 T 500 396 T 550 396 T 600 396 V420 H0 Z" fill="#1f5f8c" opacity=".8"/>
+            <path d="M-600 396 Q -575 389 -550 396 T -500 396 T -450 396 T -400 396 T -350 396 T -300 396 T -250 396 T -200 396 T -150 396 T -100 396 T -50 396 T 0 396 T 50 396 T 100 396 T 150 396 T 200 396 T 250 396 T 300 396 T 350 396 T 400 396 T 450 396 T 500 396 T 550 396 T 600 396 T 650 396 T 700 396 T 750 396 T 800 396 T 850 396 T 900 396 T 950 396 T 1000 396 V420 H-600 Z" fill="#1f5f8c" opacity=".8"/>
           </g>
           <text x="76" y="389" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" font-family="Noto Sans KR, sans-serif" stroke="#1f5f8c" stroke-width="2.6" paint-order="stroke">수위관측소</text>
         </svg>
